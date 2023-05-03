@@ -14,4 +14,5 @@ Tecnologias utilizadas: HTML, CSS, JavaScript, Highcarts JS
 ---
 ## Como executar
 
-Basta fazer o download do projeto e abrir o arquivo index.html no seu browser.
+É necessário executar o back end, disponível em: https://github.com/mateusemmerick/mvp_api
+Após isso, basta fazer o download do projeto e abrir o arquivo index.html no seu browser.
