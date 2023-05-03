@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Controle Comfy Aromas</title>
+    <link rel="icon" href="img/light-candle-svgrepo-com.svg">
+</head>
+
+<body class="myBackground">
+    <header>
+        <div class="title">
+            <h2>Controle Comfy Aromas</h2>
+        </div>
+    </header>
+
+    <div class="myTitles">
+        <div id="ProductInventoryTitle" onclick="showTable('ProductInventory')" class="myTableTitles">Estoque Produto</div>
+        <div id="ProductEntryTitle" onclick="showTable('ProductEntry')" class="myTableTitles">Entrada Produto</div>
+        <div id="ProductOutTitle" onclick="showTable('ProductOut')" class="myTableTitles">Saída Produto</div>
+        <div id="AnalyticsTitle" onclick="showAnalytics()" class="myTableTitles">Indicadores</div>
+    </div>
+
+    <!-- #region  Sections com os inputs de acordo com cada tabela -->
+    <section class="newItem" id="ProductInventoryInput">
+        <input type="text" id="newCode" placeholder="Código do produto">
+        <input type="text" id="newName" placeholder="Nome do produto">
+        <input type="text" id="newQty" placeholder="Quantidade">
+        <input type="text" id="newValue" placeholder="Valor">
+        <span onclick="addToInventory()" class="addBtn">Adicionar</span>
+    </section>
+
+    <section class="newItem" id="ProductEntryInput">
+        <select id="newCodeIn">
+            <option value="">Selecione um produto</option>
+        </select>
+        <input type="text" id="newQtyIn" placeholder="Quantidade">
+        <input type="text" id="newDateIn" pattern="[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}" placeholder="dd/mm/aaaa">
+        <span onclick="addToEntries()" class="addBtn">Adicionar</span>
+    </section>
+
+    <section class="newItem" id="ProductOutInput">
+        <select id="newCodeOut">
+            <option value="">Selecione um produto</option>
+        </select>
+        <select id="newQtyOut" disabled style="width:6rem; text-align:center;">
+            <option value="">Quantidade</option>
+        </select>
+        <input type="text" id="newClientOut" placeholder="Cliente">
+        <input type="text" id="newValueOut" placeholder="Valor">
+        <input type="text" id="newDateOut" pattern="[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}" placeholder="dd/mm/aaaa">
+        <span onclick="addToOuts()" class="addBtn">Adicionar</span>
+    </section>
+    <!-- #endregion -->
+
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="ProductInventory">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#4786bd" class="bi bi-trash3"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                    </svg>
+                </th>
+            </tr>
+        </table>
+        <table id="ProductEntry">
+            <tr>
+                <th>Id</th>
+                <th>Código</th>
+                <th>Quantidade</th>
+                <th>Data</th>
+                <th>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#4786bd" class="bi bi-trash3"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                    </svg>
+                </th>
+            </tr>
+        </table>
+        <table id="ProductOut">
+            <tr>
+                <th>Id</th>
+                <th>Código</th>
+                <th>Quantidade</th>
+                <th>Cliente</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#4786bd" class="bi bi-trash3"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                    </svg>
+                </th>
+            </tr>
+        </table>
+        <div id="Analytics" style="width:85%">
+            <div id="ProductInventoryAnalytics" style="margin-top:2rem;"></div>     
+            <div id="InOutAnalytics" style="margin-top:2rem;"></div>
+        </div>
+    </section>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="scripts.js"></script>    
+</body>
+</html>
