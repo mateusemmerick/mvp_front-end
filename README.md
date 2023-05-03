@@ -9,7 +9,7 @@ O objetivo aqui é colocar em prática o conteúdo apresentado ao longo da disci
 O projeto consiste em um sistema de controle de produtos de uma empresa de velas aromáticas. Por meio dele é possível controlar o estoque, 
 as entradas (produtos fabricados) no estoque e as saídas (produtos vendidos) e visualizar indicadores.
 
-Tecnologias utilizadas: HTML, CSS, JavaScript, Highcarts JS
+Tecnologias utilizadas: HTML, CSS, JavaScript, Highcharts JS
 
 ---
 ## Como executar
